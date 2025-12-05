@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, Droplet, Users, HeartPulse, LogOut, MessageSquareText, FileOutput, FlaskConical, ShieldCheck } from 'lucide-react';
+import { LayoutDashboard, Wallet, Users, HeartPulse, LogOut, FileOutput } from 'lucide-react';
 
 interface SidebarProps {
   currentView: string;
@@ -9,12 +9,9 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'inventory', label: 'Inventory', icon: Droplet },
-    { id: 'collection', label: 'Collection', icon: FlaskConical },
+    { id: 'collection', label: 'Collection', icon: Wallet },
     { id: 'issue', label: 'Issue Blood', icon: FileOutput },
-    { id: 'donors', label: 'Donors', icon: Users },
-    { id: 'users', label: 'Users', icon: ShieldCheck },
-    { id: 'assistant', label: 'AI Assistant', icon: MessageSquareText },
+    { id: 'users', label: 'Users', icon: Users },
   ];
 
   return (

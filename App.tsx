@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
-import { InventoryView } from './components/InventoryView';
-import { DonorsView } from './components/DonorsView';
-import { AIAssistant } from './components/AIAssistant';
 import { CollectionView } from './components/CollectionView';
 import { IssueBloodView } from './components/IssueBloodView';
 import { UsersView } from './components/UsersView';
-import { BloodUnit, Donor, BloodGroup } from './types';
+import { BloodUnit, BloodGroup } from './types';
 
 // Mock Initial Data
 const INITIAL_UNITS: BloodUnit[] = [
@@ -24,53 +21,20 @@ const INITIAL_UNITS: BloodUnit[] = [
   { id: 'BU-1011', bloodGroup: BloodGroup.AB_NEG, collectionDate: '2023-10-25', expiryDate: '2023-12-06', volume: 450, status: 'Available' },
 ];
 
-const INITIAL_DONORS: Donor[] = [
-  { id: 'D-001', name: 'John Doe', age: 32, bloodGroup: BloodGroup.O_NEG, contact: '+1 555-0123', lastDonationDate: '2023-08-15', status: 'Active' },
-  { id: 'D-002', name: 'Jane Smith', age: 28, bloodGroup: BloodGroup.A_POS, contact: '+1 555-0124', lastDonationDate: '2023-09-20', status: 'Active' },
-  { id: 'D-003', name: 'Robert Johnson', age: 45, bloodGroup: BloodGroup.B_POS, contact: '+1 555-0125', lastDonationDate: '2023-01-10', status: 'Deferred' },
-];
-
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState('dashboard');
-  const [units, setUnits] = useState<BloodUnit[]>(INITIAL_UNITS);
-  const [donors, setDonors] = useState<Donor[]>(INITIAL_DONORS);
-
-  const handleAddUnit = (unit: Omit<BloodUnit, 'id'>) => {
-    const newUnit: BloodUnit = {
-      ...unit,
-      id: `BU-${Math.floor(Math.random() * 10000)}`
-    };
-    setUnits([newUnit, ...units]);
-  };
-
-  const handleDeleteUnit = (id: string) => {
-    setUnits(units.filter(u => u.id !== id));
-  };
-
-  const handleAddDonor = (donor: Omit<Donor, 'id'>) => {
-    const newDonor: Donor = {
-      ...donor,
-      id: `D-${Math.floor(Math.random() * 1000)}`
-    };
-    setDonors([newDonor, ...donors]);
-  };
+  const [units] = useState<BloodUnit[]>(INITIAL_UNITS);
 
   const renderContent = () => {
     switch (currentView) {
       case 'dashboard':
         return <Dashboard units={units} />;
-      case 'inventory':
-        return <InventoryView units={units} onAddUnit={handleAddUnit} onDeleteUnit={handleDeleteUnit} />;
       case 'collection':
         return <CollectionView />;
       case 'issue':
         return <IssueBloodView />;
-      case 'donors':
-        return <DonorsView donors={donors} onAddDonor={handleAddDonor} />;
       case 'users':
         return <UsersView />;
-      case 'assistant':
-        return <AIAssistant />;
       default:
         return <Dashboard units={units} />;
     }
