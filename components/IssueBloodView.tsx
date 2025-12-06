@@ -209,7 +209,7 @@ export const IssueBloodView: React.FC = () => {
                     <div className="flex items-center gap-6">
                          <div className="text-right">
                             <p className="text-xs text-slate-400 font-semibold uppercase">Amount</p>
-                            <p className="font-bold text-slate-700">${req.amount.toLocaleString()}</p>
+                            <p className="font-bold text-slate-700">${(req.amount || 0).toLocaleString()}</p>
                         </div>
                          <div className="text-right mr-2">
                             <p className="text-xs text-slate-400 font-semibold uppercase">Quantity</p>
